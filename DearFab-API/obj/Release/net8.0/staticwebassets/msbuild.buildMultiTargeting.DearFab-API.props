@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\DearFab-API.props" />
+</Project>

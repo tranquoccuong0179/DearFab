@@ -1,0 +1,15 @@
+C:\Freelance\DearFab\DearFab\DearFab-Repository\bin\Release\net8.0\DearFab-Repository.deps.json
+C:\Freelance\DearFab\DearFab\DearFab-Repository\bin\Release\net8.0\DearFab-Repository.dll
+C:\Freelance\DearFab\DearFab\DearFab-Repository\bin\Release\net8.0\DearFab-Repository.pdb
+C:\Freelance\DearFab\DearFab\DearFab-Repository\bin\Release\net8.0\DearFab-Model.dll
+C:\Freelance\DearFab\DearFab\DearFab-Repository\bin\Release\net8.0\DearFab-Model.pdb
+C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Release\net8.0\DearFab-Repository.csproj.AssemblyReference.cache
+C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Release\net8.0\DearFab-Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Release\net8.0\DearFab-Repository.AssemblyInfoInputs.cache
+C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Release\net8.0\DearFab-Repository.AssemblyInfo.cs
+C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Release\net8.0\DearFab-Repository.csproj.CoreCompileInputs.cache
+C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Release\net8.0\DearFab-.2D5DBC99.Up2Date
+C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Release\net8.0\DearFab-Repository.dll
+C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Release\net8.0\refint\DearFab-Repository.dll
+C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Release\net8.0\DearFab-Repository.pdb
+C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Release\net8.0\ref\DearFab-Repository.dll
