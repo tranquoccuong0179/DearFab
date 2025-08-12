@@ -89,3 +89,4 @@ C:\Freelance\DearFab\DearFab\DearFab-API\obj\Release\net8.0\DearFab-API.pdb
 C:\Freelance\DearFab\DearFab\DearFab-API\obj\Release\net8.0\DearFab-API.genruntimeconfig.cache
 C:\Freelance\DearFab\DearFab\DearFab-API\obj\Release\net8.0\ref\DearFab-API.dll
 C:\Freelance\DearFab\DearFab\DearFab-API\bin\Release\net8.0\Appwrite.dll
+C:\Freelance\DearFab\DearFab\DearFab-API\obj\Release\net8.0\DearFab-API.sourcelink.json

@@ -15,3 +15,4 @@ C:\Freelance\DearFab\DearFab\DearFab-Service\obj\Debug\net8.0\DearFab-Service.dl
 C:\Freelance\DearFab\DearFab\DearFab-Service\obj\Debug\net8.0\refint\DearFab-Service.dll
 C:\Freelance\DearFab\DearFab\DearFab-Service\obj\Debug\net8.0\DearFab-Service.pdb
 C:\Freelance\DearFab\DearFab\DearFab-Service\obj\Debug\net8.0\ref\DearFab-Service.dll
+C:\Freelance\DearFab\DearFab\DearFab-Service\obj\Debug\net8.0\DearFab-Service.sourcelink.json

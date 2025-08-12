@@ -25,4 +25,9 @@
       <PackageReference Include="payOS" Version="1.0.9" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Payload\Request\Review\" />
+      <Folder Include="Payload\Response\Review\" />
+    </ItemGroup>
+
 </Project>

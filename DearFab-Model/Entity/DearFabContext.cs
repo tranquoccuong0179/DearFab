@@ -25,6 +25,8 @@ public partial class DearFabContext : DbContext
 
     public virtual DbSet<ProductSize> ProductSizes { get; set; }
 
+    public virtual DbSet<Review> Reviews { get; set; }
+
     public virtual DbSet<Size> Sizes { get; set; }
 
     public virtual DbSet<Transaction> Transactions { get; set; }
@@ -107,6 +109,24 @@ public partial class DearFabContext : DbContext
                 .HasForeignKey(d => d.SizeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ProductSize_Size_1");
+        });
+
+        modelBuilder.Entity<Review>(entity =>
+        {
+            entity.ToTable("Review");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.CreateAt).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Account).WithMany(p => p.Reviews)
+                .HasForeignKey(d => d.AccountId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Review_Account");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.Reviews)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Review_Product_1");
         });
 
         modelBuilder.Entity<Size>(entity =>

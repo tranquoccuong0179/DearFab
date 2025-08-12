@@ -13,3 +13,4 @@ C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Debug\net8.0\DearFab-Reposit
 C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Debug\net8.0\refint\DearFab-Repository.dll
 C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Debug\net8.0\DearFab-Repository.pdb
 C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Debug\net8.0\ref\DearFab-Repository.dll
+C:\Freelance\DearFab\DearFab\DearFab-Repository\obj\Debug\net8.0\DearFab-Repository.sourcelink.json

@@ -24,4 +24,6 @@ public partial class Product
     public DateTime? DeleteAt { get; set; }
 
     public virtual ICollection<ProductSize> ProductSizes { get; set; } = new List<ProductSize>();
+
+    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 }

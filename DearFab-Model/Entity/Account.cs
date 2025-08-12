@@ -28,4 +28,6 @@ public partial class Account
     public DateTime? DeleteAt { get; set; }
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
+    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 }

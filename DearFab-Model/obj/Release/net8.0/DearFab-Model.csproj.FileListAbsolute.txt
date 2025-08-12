@@ -12,3 +12,4 @@ C:\Freelance\DearFab\DearFab\DearFab-Model\obj\Release\net8.0\refint\DearFab-Mod
 C:\Freelance\DearFab\DearFab\DearFab-Model\obj\Release\net8.0\DearFab-Model.pdb
 C:\Freelance\DearFab\DearFab\DearFab-Model\obj\Release\net8.0\DearFab-Model.genruntimeconfig.cache
 C:\Freelance\DearFab\DearFab\DearFab-Model\obj\Release\net8.0\ref\DearFab-Model.dll
+C:\Freelance\DearFab\DearFab\DearFab-Model\obj\Release\net8.0\DearFab-Model.sourcelink.json

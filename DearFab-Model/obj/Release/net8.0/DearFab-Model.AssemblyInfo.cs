@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DearFab-Model")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a376f57d53f2000f2912f29e794387a0955f081")]
 [assembly: System.Reflection.AssemblyProductAttribute("DearFab-Model")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DearFab-Model")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

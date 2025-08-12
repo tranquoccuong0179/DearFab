@@ -89,3 +89,4 @@ C:\Freelance\DearFab\DearFab\DearFab-API\bin\Debug\net8.0\DearFab-Service.pdb
 C:\Freelance\DearFab\DearFab\DearFab-API\bin\Debug\net8.0\DearFab-Model.pdb
 C:\Freelance\DearFab\DearFab\DearFab-API\bin\Debug\net8.0\DearFab-Repository.pdb
 C:\Freelance\DearFab\DearFab\DearFab-API\bin\Debug\net8.0\Appwrite.dll
+C:\Freelance\DearFab\DearFab\DearFab-API\obj\Debug\net8.0\DearFab-API.sourcelink.json

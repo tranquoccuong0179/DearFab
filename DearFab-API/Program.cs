@@ -13,13 +13,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: CorsConstant.PolicyName,
-        policy =>
-        {
-            policy.WithOrigins("*")
-                .AllowAnyHeader().AllowAnyMethod();
-        });
+    options.AddPolicy(name: CorsConstant.PolicyName, policy =>
+    {
+        policy
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials()
+            .SetIsOriginAllowed(_ => true);
+    });
 });
+
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
