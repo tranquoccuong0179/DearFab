@@ -30,6 +30,8 @@ public static class ApiEndPointConstant
         public const string GetProductById = ProductEndPoint + "/{id}";
         public const string UpdateProduct = ProductEndPoint + "/{id}";
         public const string DeleteProduct = ProductEndPoint + "/{id}";
+        public const string CreateReview = ProductEndPoint + "/{id}/review";
+        public const string GetAllReview = ProductEndPoint + "/{id}/review";
     }
     
     public static class Size

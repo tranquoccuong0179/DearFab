@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Freelance\\DearFab\\DearFab\\DearFab-Repository\\DearFab-Repository.csproj": {}
+    "C:\\Users\\Cuong\\Desktop\\DearFab\\DearFab-Repository\\DearFab-Repository.csproj": {}
   },
   "projects": {
-    "C:\\Freelance\\DearFab\\DearFab\\DearFab-Model\\DearFab-Model.csproj": {
+    "C:\\Users\\Cuong\\Desktop\\DearFab\\DearFab-Model\\DearFab-Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Freelance\\DearFab\\DearFab\\DearFab-Model\\DearFab-Model.csproj",
+        "projectUniqueName": "C:\\Users\\Cuong\\Desktop\\DearFab\\DearFab-Model\\DearFab-Model.csproj",
         "projectName": "DearFab-Model",
-        "projectPath": "C:\\Freelance\\DearFab\\DearFab\\DearFab-Model\\DearFab-Model.csproj",
+        "projectPath": "C:\\Users\\Cuong\\Desktop\\DearFab\\DearFab-Model\\DearFab-Model.csproj",
         "packagesPath": "C:\\Users\\Cuong\\.nuget\\packages\\",
-        "outputPath": "C:\\Freelance\\DearFab\\DearFab\\DearFab-Model\\obj\\",
+        "outputPath": "C:\\Users\\Cuong\\Desktop\\DearFab\\DearFab-Model\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Cuong\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Cuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -37,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -100,34 +107,40 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Freelance\\DearFab\\DearFab\\DearFab-Repository\\DearFab-Repository.csproj": {
+    "C:\\Users\\Cuong\\Desktop\\DearFab\\DearFab-Repository\\DearFab-Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Freelance\\DearFab\\DearFab\\DearFab-Repository\\DearFab-Repository.csproj",
+        "projectUniqueName": "C:\\Users\\Cuong\\Desktop\\DearFab\\DearFab-Repository\\DearFab-Repository.csproj",
         "projectName": "DearFab-Repository",
-        "projectPath": "C:\\Freelance\\DearFab\\DearFab\\DearFab-Repository\\DearFab-Repository.csproj",
+        "projectPath": "C:\\Users\\Cuong\\Desktop\\DearFab\\DearFab-Repository\\DearFab-Repository.csproj",
         "packagesPath": "C:\\Users\\Cuong\\.nuget\\packages\\",
-        "outputPath": "C:\\Freelance\\DearFab\\DearFab\\DearFab-Repository\\obj\\",
+        "outputPath": "C:\\Users\\Cuong\\Desktop\\DearFab\\DearFab-Repository\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Cuong\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Cuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Freelance\\DearFab\\DearFab\\DearFab-Model\\DearFab-Model.csproj": {
-                "projectPath": "C:\\Freelance\\DearFab\\DearFab\\DearFab-Model\\DearFab-Model.csproj"
+              "C:\\Users\\Cuong\\Desktop\\DearFab\\DearFab-Model\\DearFab-Model.csproj": {
+                "projectPath": "C:\\Users\\Cuong\\Desktop\\DearFab\\DearFab-Model\\DearFab-Model.csproj"
               }
             }
           }
@@ -141,7 +154,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -162,7 +176,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

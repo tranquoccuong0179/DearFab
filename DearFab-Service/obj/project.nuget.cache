@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2j/Kcq8Yr7w=",
+  "dgSpecHash": "sxEmo1g0x0I=",
   "success": true,
-  "projectFilePath": "C:\\Freelance\\DearFab\\DearFab\\DearFab-Service\\DearFab-Service.csproj",
+  "projectFilePath": "C:\\Users\\Cuong\\Desktop\\DearFab\\DearFab-Service\\DearFab-Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Cuong\\.nuget\\packages\\appwrite\\0.13.0\\appwrite.0.13.0.nupkg.sha512",
     "C:\\Users\\Cuong\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
