@@ -97,10 +97,11 @@ public class ProductService : BaseService<ProductService>, IProductService
                 Description = p.Description,
                 Image = p.Image,
                 Price = p.ProductSizes.Where(ps => ps.Price.HasValue && ps.IsActive == true).Select(ps => ps.Price.Value).Min(),
-                Quantity = p.ProductSizes.Where(ps => ps.Quantity.HasValue && ps.IsActive == true).Select(ps => ps.Quantity.Value).Sum()
+                Quantity = p.ProductSizes.Where(ps => ps.Quantity.HasValue && ps.IsActive == true).Select(ps => ps.Quantity.Value).Sum(),
+                Rating = p.Reviews.Average(r => (double?)r.Rating) ?? 0
             },
             predicate: p => p.IsActive == true,
-            include: p => p.Include(p => p.ProductSizes),
+            include: p => p.Include(p => p.ProductSizes).Include(p => p.Reviews),
             page: page,
             size: size);
 

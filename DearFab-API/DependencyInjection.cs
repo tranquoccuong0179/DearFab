@@ -36,6 +36,7 @@ public static class DependencyInjection
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IProductSizeService, ProductSizeService>();
+            services.AddScoped<IReviewService, ReviewService>();
             return services;
         }
         public static IServiceCollection AddHttpClientServices(this IServiceCollection services)

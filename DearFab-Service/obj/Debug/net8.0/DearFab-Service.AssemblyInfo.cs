@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DearFab-Service")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+278cc9060f7fbebab3173228c6f6679f0d686243")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bc4fe7922b43e41c807b002cc43f9578e75cff1d")]
 [assembly: System.Reflection.AssemblyProductAttribute("DearFab-Service")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DearFab-Service")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
