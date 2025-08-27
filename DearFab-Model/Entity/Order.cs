@@ -21,6 +21,8 @@ public partial class Order
 
     public Guid? AccountId { get; set; }
 
+    public string? Phone { get; set; }
+
     public virtual Account? Account { get; set; }
 
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();

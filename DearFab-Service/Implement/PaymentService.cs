@@ -4,6 +4,7 @@ using DearFab_Model.Entity;
 using DearFab_Model.Enum;
 using DearFab_Model.Payload.Request.Payment;
 using DearFab_Model.Payload.Response;
+using DearFab_Model.Payload.Response.Order;
 using DearFab_Model.Payload.Settings;
 using DearFab_Model.Utils;
 using DearFab_Repository.Interface;
@@ -14,6 +15,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Net.payOS;
 using Net.payOS.Types;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Transaction = DearFab_Model.Entity.Transaction;
 
 namespace DearFab_Service.Implement;
@@ -139,6 +142,96 @@ public class PaymentService : BaseService<PaymentService>, IPaymentService
             Data = paymentResult,
         };
     }
+
+    public async Task<BaseResponse<bool>> ConfirmWebhook(WebhookType payload)
+    {
+        string code = payload.code;
+        bool success = payload.success;
+        var transaction = await _unitOfWork.GetRepository<Transaction>().SingleOrDefaultAsync(
+            predicate: t => t.OrderCode == payload.data.orderCode);
+        if (success && code == "00")
+        {
+            await HandleSuccessPayment(transaction);
+        }
+        return new BaseResponse<bool>
+        {
+            Status = StatusCodes.Status200OK,
+            Message = "Thành công",
+            Data = true
+        };
+    }
+
+    public async Task HandleSuccessPayment(Transaction transaction)
+    {
+        transaction.UpdateAt = TimeUtil.GetCurrentSEATime();
+        transaction.Status = StatusTransactionEnum.Completed.ToString();
+        
+        _unitOfWork.GetRepository<Transaction>().UpdateAsync(transaction);
+
+        var order = await _unitOfWork.GetRepository<Order>().SingleOrDefaultAsync(
+            predicate: o => o.Id.Equals(transaction.OrderId));
+        
+        order.Status = StatusEnum.InProgress.ToString();
+        _unitOfWork.GetRepository<Order>().UpdateAsync(order);
+        await _unitOfWork.CommitAsync();
+    }
+
+    public async Task<BaseResponse<bool>> HandleFailedPayment(string paymentLinkId, long orderCode)
+    {
+        var paymentInfo = await GetPaymentInfo(paymentLinkId);
+        if (paymentInfo.Status == "CANCELLED")
+        {
+            var transactions = await _unitOfWork.GetRepository<Transaction>().SingleOrDefaultAsync(
+                predicate: t => t.OrderCode == orderCode);
+
+            if (transactions != null)
+            {
+                transactions.UpdateAt = TimeUtil.GetCurrentSEATime();
+                transactions.Status = StatusTransactionEnum.Rejected.ToString();
+                _unitOfWork.GetRepository<Transaction>().UpdateAsync(transactions);
+                await _unitOfWork.CommitAsync();
+                return new BaseResponse<bool>()
+                {
+                    Status = StatusCodes.Status200OK,
+                    Message = "Hủy thanh toán thành công",
+                    Data = true
+                };
+            }
+        }
+        return new BaseResponse<bool>()
+        {
+            Status = StatusCodes.Status200OK,
+            Message = "Hủy thanh toán thành công",
+            Data = true
+        };
+    }
+    
+    public async Task<ObjectPayment> GetPaymentInfo(string paymentLinkId)
+    {
+        try
+        {
+            var getUrl = $"https://api-merchant.payos.vn/v2/payment-requests/{paymentLinkId}";
+
+            var request = new HttpRequestMessage(HttpMethod.Get, getUrl);
+            request.Headers.Add("x-client-id", _payOSSettings.ClientId);
+            request.Headers.Add("x-api-key", _payOSSettings.ApiKey);
+
+            var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var responseObject = JsonConvert.DeserializeObject<JObject>(responseContent);
+            var paymentInfo = responseObject["data"].ToObject<ObjectPayment>();
+
+            return paymentInfo;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("An error occurred while getting payment info.", ex);
+        }
+
+    }
+
     private string? ComputeHmacSha256(string data, string checksumKey)
     {
         using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(checksumKey)))

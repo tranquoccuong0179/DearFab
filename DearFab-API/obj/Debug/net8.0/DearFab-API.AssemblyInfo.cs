@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DearFab-API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bc4fe7922b43e41c807b002cc43f9578e75cff1d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a8a200812af4cc448db9b9e0d39506aacac0e02")]
 [assembly: System.Reflection.AssemblyProductAttribute("DearFab-API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DearFab-API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -10,4 +10,6 @@ public interface IReviewService
     Task<BaseResponse<CreateReviewResponse>> CreateReview(Guid id, CreateReviewRequest createReviewRequest);
     
     Task<BaseResponse<IPaginate<GetReviewResponse>>> GetAllReviews(Guid id, int page, int size);
+    
+    Task<BaseResponse<bool>> DeleteReview(Guid id);
 }

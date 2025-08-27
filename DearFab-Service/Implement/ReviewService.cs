@@ -1,4 +1,5 @@
 ﻿using DearFab_Model.Entity;
+using DearFab_Model.Enum;
 using DearFab_Model.Paginate;
 using DearFab_Model.Payload.Request.Review;
 using DearFab_Model.Payload.Response;
@@ -14,6 +15,8 @@ namespace DearFab_Service.Implement;
 
 public class ReviewService : BaseService<ReviewService>, IReviewService
 {
+    private IReviewService _reviewServiceImplementation;
+
     public ReviewService(IUnitOfWork<DearFabContext> unitOfWork, ILogger<ReviewService> logger, IHttpContextAccessor httpContextAccessor) : base(unitOfWork, logger, httpContextAccessor)
     {
     }
@@ -103,7 +106,8 @@ public class ReviewService : BaseService<ReviewService>, IReviewService
                 Content = r.Content,
                 Rating = r.Rating,
                 FullName = r.Account.FullName,
-                CreateAt = r.CreateAt
+                CreateAt = r.CreateAt,
+                AccountId = r.AccountId,
             },
             predicate: r => r.ProductId.Equals(product.Id) && r.IsActive == true,
             include: r => r.Include(r => r.Account),
@@ -115,6 +119,70 @@ public class ReviewService : BaseService<ReviewService>, IReviewService
             Status = StatusCodes.Status200OK,
             Message = "Lấy danh sách đánh giá sản phẩm thành công",
             Data = reviews
+        };
+    }
+
+    public async Task<BaseResponse<bool>> DeleteReview(Guid id)
+    {
+        Guid? accountId = UserUtil.GetAccountId(_httpContextAccessor.HttpContext);
+
+        var account = await _unitOfWork.GetRepository<Account>().SingleOrDefaultAsync(
+            predicate: a => a.Id.Equals(accountId) && a.IsActive == true);
+
+        if (account == null)
+        {
+            return new BaseResponse<bool>()
+            {
+                Status = StatusCodes.Status404NotFound,
+                Message = "Không tìm thấy thông tin người dùng",
+                Data = false
+            };
+        }
+        
+        var reviewRepo = _unitOfWork.GetRepository<Review>();
+        var review = await reviewRepo.SingleOrDefaultAsync(predicate: r => r.Id.Equals(id));;
+
+        if (review == null)
+        {
+            return new BaseResponse<bool>()
+            {
+                Status = StatusCodes.Status404NotFound,
+                Message = "Không tìm thấy review",
+                Data = false
+            };
+        }
+        
+        if (account.Role.Equals(RoleEnum.Admin.GetDescriptionFromEnum()))
+        {
+            reviewRepo.DeleteAsync(review);
+            await _unitOfWork.CommitAsync();
+
+            return new BaseResponse<bool>()
+            {
+                Status = StatusCodes.Status200OK,
+                Message = "Xóa đánh giá thành công",
+                Data = true
+            };
+        }
+        
+        if (!review.AccountId.Equals(account.Id))
+        {
+            return new BaseResponse<bool>()
+            {
+                Status = StatusCodes.Status403Forbidden,
+                Message = "Bạn không có quyền xóa đánh giá này",
+                Data = false
+            };
+        }
+        
+        reviewRepo.DeleteAsync(review);
+        await _unitOfWork.CommitAsync();
+        
+        return new BaseResponse<bool>()
+        {
+            Status = StatusCodes.Status200OK,
+            Message = "Xóa đánh giá thành công",
+            Data = true
         };
     }
 }

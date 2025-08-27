@@ -43,6 +43,7 @@ public class OrderService : BaseService<OrderService>, IOrderService
             AccountId = account.Id,
             Status = StatusEnum.Pending.GetDescriptionFromEnum(),
             Address = request.Address,
+            Phone = account.Phone,
             TotalPrice = 0,
             IsActive = true,
             CreateAt = TimeUtil.GetCurrentSEATime()
@@ -93,6 +94,7 @@ public class OrderService : BaseService<OrderService>, IOrderService
             Message = "Tạo đơn hàng thành công",
             Data = new CreateOrderResponse()
             {
+                Id = order.Id,
                 ProductSizeId = orderItems.Select(oi => oi.ProductSizeId).ToList(),
                 TotalPrice = totalPrice,
                 Address = order.Address,
@@ -118,18 +120,45 @@ public class OrderService : BaseService<OrderService>, IOrderService
             };
         }
 
-        var orders = await _unitOfWork.GetRepository<Order>().GetPagingListAsync(
-            selector: o => new GetOrderResponse()
-            {
-                Id = o.Id,
-                Address = o.Address,
-                TotalPrice = o.TotalPrice,
-                Status = o.Status,
-            },
-            predicate: o => o.AccountId.Equals(accountId) && o.IsActive == true,
-            orderBy: o => o.OrderByDescending(o => o.CreateAt),
-            page: page,
-            size: size);
+        IPaginate<GetOrderResponse> orders = new Paginate<GetOrderResponse>();
+
+        if (account.Role.Equals(RoleEnum.Admin.GetDescriptionFromEnum()))
+        {
+            orders = await _unitOfWork.GetRepository<Order>().GetPagingListAsync(
+                selector: o => new GetOrderResponse()
+                {
+                    Id = o.Id,
+                    FullName = o.Account.FullName,
+                    Address = o.Address,
+                    Phone = o.Phone,
+                    TotalPrice = o.TotalPrice,
+                    Status = o.Status,
+                },
+                predicate: o => o.IsActive == true,
+                include: o => o.Include(o => o.Account),
+                orderBy: o => o.OrderByDescending(o => o.CreateAt),
+                page: page,
+                size: size);
+        }
+
+        else
+        {
+            orders = await _unitOfWork.GetRepository<Order>().GetPagingListAsync(
+                selector: o => new GetOrderResponse()
+                {
+                    Id = o.Id,
+                    FullName = o.Account.FullName,
+                    Address = o.Address,
+                    Phone = o.Phone,
+                    TotalPrice = o.TotalPrice,
+                    Status = o.Status,
+                },
+                predicate: o => o.AccountId.Equals(accountId) && o.IsActive == true,
+                include: o => o.Include(o => o.Account),
+                orderBy: o => o.OrderByDescending(o => o.CreateAt),
+                page: page,
+                size: size);
+        }
 
         return new BaseResponse<IPaginate<GetOrderResponse>>()
         {
@@ -156,25 +185,56 @@ public class OrderService : BaseService<OrderService>, IOrderService
             };
         }
 
-        var order = await _unitOfWork.GetRepository<Order>().SingleOrDefaultAsync(
-            selector: o => new GetOrderDetailResponse()
-            {
-                Id = o.Id,
-                Address = o.Address,
-                TotalPrice = o.TotalPrice,
-                Status = o.Status,
-                items = o.OrderItems.Select(oi => new GetOrderItemResponse()
+        var order = new GetOrderDetailResponse();
+        if (account.Role.Equals(RoleEnum.Admin.GetDescriptionFromEnum()))
+        {
+            order = await _unitOfWork.GetRepository<Order>().SingleOrDefaultAsync(
+                selector: o => new GetOrderDetailResponse()
                 {
-                    Id = oi.Id,
-                    Name = oi.ProductSize.Product.Name,
-                    Price = oi.ProductSize.Price,
-                    Quantity = oi.Quantity,
-                    Description = oi.ProductSize.Product.Description,
-                    Image = oi.ProductSize.Product.Image,
-                }).ToList()
-            },
-            predicate: o => o.Id.Equals(id) && o.AccountId.Equals(account.Id) && o.IsActive == true,
-            include: o => o.Include(o => o.OrderItems).ThenInclude(oi => oi.ProductSize).ThenInclude(ps => ps.Product));
+                    Id = o.Id,
+                    FullName = o.Account.FullName,
+                    Address = o.Address,
+                    TotalPrice = o.TotalPrice,
+                    Phone = o.Phone,
+                    Status = o.Status,
+                    items = o.OrderItems.Select(oi => new GetOrderItemResponse()
+                    {
+                        Id = oi.Id,
+                        Name = oi.ProductSize.Product.Name,
+                        Price = oi.ProductSize.Price,
+                        Quantity = oi.Quantity,
+                        Description = oi.ProductSize.Product.Description,
+                        Image = oi.ProductSize.Product.Image,
+                    }).ToList()
+                },
+                predicate: o => o.Id.Equals(id) && o.IsActive == true,
+                include: o => o.Include(o => o.OrderItems).ThenInclude(oi => oi.ProductSize).ThenInclude(ps => ps.Product).Include(o => o.Account));
+        }
+
+        else
+        {
+            order = await _unitOfWork.GetRepository<Order>().SingleOrDefaultAsync(
+                selector: o => new GetOrderDetailResponse()
+                {
+                    Id = o.Id,
+                    FullName = o.Account.FullName,
+                    Address = o.Address,
+                    Phone = o.Phone,
+                    TotalPrice = o.TotalPrice,
+                    Status = o.Status,
+                    items = o.OrderItems.Select(oi => new GetOrderItemResponse()
+                    {
+                        Id = oi.Id,
+                        Name = oi.ProductSize.Product.Name,
+                        Price = oi.ProductSize.Price,
+                        Quantity = oi.Quantity,
+                        Description = oi.ProductSize.Product.Description,
+                        Image = oi.ProductSize.Product.Image,
+                    }).ToList()
+                },
+                predicate: o => o.Id.Equals(id) && o.AccountId.Equals(account.Id) && o.IsActive == true,
+                include: o => o.Include(o => o.OrderItems).ThenInclude(oi => oi.ProductSize).ThenInclude(ps => ps.Product));
+        }
 
         if (order == null)
         {
@@ -191,6 +251,59 @@ public class OrderService : BaseService<OrderService>, IOrderService
             Status = StatusCodes.Status200OK,
             Message = "Lấy thông tin đơn hàng thành công",
             Data = order,
+        };
+    }
+
+    public async Task<BaseResponse<GetOrderResponse>> ChangeStatus(Guid id)
+    {
+        var order = await _unitOfWork.GetRepository<Order>().SingleOrDefaultAsync(
+            predicate: o => o.Id.Equals(id) && o.IsActive == true);
+
+        if (order == null)
+        {
+            return new BaseResponse<GetOrderResponse>()
+            {
+                Status = StatusCodes.Status404NotFound,
+                Message = "Không tìm thấy đơn hàng",
+                Data = null
+            };
+        }
+
+        if (order.Status.Equals(StatusEnum.Pending.GetDescriptionFromEnum()))
+        {
+            return new BaseResponse<GetOrderResponse>()
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Message = "Đơn hàng này chưa được thanh toán",
+                Data = null
+            };
+        }
+        if (order.Status.Equals(StatusEnum.Completed.GetDescriptionFromEnum()))
+        {
+            return new BaseResponse<GetOrderResponse>()
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Message = "Đơn hàng này đã hoàn thành",
+                Data = null
+            };
+        }
+        
+        order.Status = StatusEnum.Completed.GetDescriptionFromEnum();
+        
+        _unitOfWork.GetRepository<Order>().UpdateAsync(order);
+        await _unitOfWork.CommitAsync();
+
+        return new BaseResponse<GetOrderResponse>()
+        {
+            Status = StatusCodes.Status200OK,
+            Message = "Cập nhật trạng thái đơn hàng thành công",
+            Data = new GetOrderResponse()
+            {
+                Id = order.Id,
+                Address = order.Address,
+                TotalPrice = order.TotalPrice,
+                Status = order.Status
+            }
         };
     }
 }

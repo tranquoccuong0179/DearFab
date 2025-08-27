@@ -48,12 +48,15 @@ public static class ApiEndPointConstant
         public const string CreateOrder = OrderEndPoint;
         public const string GetOrders = OrderEndPoint;
         public const string GetOrder = OrderEndPoint + "/{id}";
+        public const string ChangeStatus = OrderEndPoint + "/{id}/status";
     }
     
     public static class Payment
     {
         public const string PaymentEndPoint = ApiEndpoint + "/payment";
         public const string CreatePayment = PaymentEndPoint;
+        public const string HandlePayment = PaymentEndPoint + "/handle";
+        public const string ReturnUrlFail = PaymentEndPoint + "/failed";
     }
     
     public static class ProductSize
@@ -61,5 +64,11 @@ public static class ApiEndPointConstant
         public const string ProductSizeEndPoint = ApiEndpoint + "/product-size";
         public const string DeleteProductSize = ProductSizeEndPoint + "/{id}";
         public const string UpdateProductSize = ProductSizeEndPoint + "/{id}";
+    }
+
+    public static class Review
+    {
+        public const string ReviewEndPoint = ApiEndpoint + "/review";
+        public const string DeleteReview = ReviewEndPoint + "/{id}";
     }
 }

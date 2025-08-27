@@ -11,4 +11,6 @@ public class GetReviewResponse
     public string? FullName { get; set; }
     
     public DateTime? CreateAt { get; set; }
+    
+    public Guid? AccountId { get; set; }
 }

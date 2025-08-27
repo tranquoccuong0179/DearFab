@@ -47,4 +47,14 @@ public class OrderController : BaseController<OrderController>
         var response = await _orderService.GetOrderDetail(id);
         return StatusCode(response.Status, response);
     }
+    
+    [HttpPut(ApiEndPointConstant.Order.ChangeStatus)]
+    [ProducesResponseType(typeof(BaseResponse<GetOrderResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(BaseResponse<GetOrderResponse>), StatusCodes.Status404NotFound)]
+    [ProducesErrorResponseType(typeof(ProblemDetails))]
+    public async Task<IActionResult> ChangeStatus([FromRoute] Guid id)
+    {
+        var response = await _orderService.ChangeStatus(id);
+        return StatusCode(response.Status, response);
+    }
 }

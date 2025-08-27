@@ -30,11 +30,7 @@ public partial class DearFabContext : DbContext
     public virtual DbSet<Size> Sizes { get; set; }
 
     public virtual DbSet<Transaction> Transactions { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=14.225.253.29;Database=DearFab;User Id=sa;Password=winnertech123@;TrustServerCertificate=True;");
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
@@ -59,6 +55,9 @@ public partial class DearFabContext : DbContext
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.CreateAt).HasColumnType("datetime");
+            entity.Property(e => e.Phone)
+                .HasMaxLength(20)
+                .IsUnicode(false);
             entity.Property(e => e.Status).HasMaxLength(50);
             entity.Property(e => e.UpdateAt).HasColumnType("datetime");
 

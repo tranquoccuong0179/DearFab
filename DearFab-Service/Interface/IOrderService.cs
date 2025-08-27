@@ -12,4 +12,6 @@ public interface IOrderService
     Task<BaseResponse<IPaginate<GetOrderResponse>>> GetAllOrder(int page, int size);
     
     Task<BaseResponse<GetOrderDetailResponse>> GetOrderDetail(Guid id);
+    
+    Task<BaseResponse<GetOrderResponse>> ChangeStatus(Guid id);
 }

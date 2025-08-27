@@ -2,6 +2,8 @@
 
 public class CreateOrderResponse
 {
+    public Guid Id { get; set; }
+    
     public List<Guid>? ProductSizeId { get; set; }
     
     public double TotalPrice { get; set; }
